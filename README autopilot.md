@@ -1,6 +1,7 @@
 # Lab Entra ID & Intune : gestion d'un poste Windows 11 de bout en bout
 
-> Les emplacements `📸` sont à remplacer par tes captures. Supprime cette note avant de publier.
+<img width="2752" height="1536" alt="Gemini_Generated_Image_wi2wg3wi2wg3wi2w" src="https://github.com/user-attachments/assets/d2d98aa9-4191-4977-b244-3d1b8ed24aca" />
+
 
 ---
 
@@ -23,6 +24,54 @@
 ---
 
 ## 2. Architecture et prérequis
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         🌐 TENANT MICROSOFT 365                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                      │
+        ┌─────────────────────────────┼─────────────────────────────┐
+        ▼                             ▼                             ▼
+┌───────────────┐           ┌─────────────────┐           ┌─────────────────┐
+│   🔷 Entra ID  │           │  📦 Intune MDM   │           │  🔄 Autopilot   │
+│   Identités    │◄─────────►│   Gestion        │◄─────────►│   Provisioning  │
+│   & Groupes    │           │   Appareils      │           │   OOBE          │
+└───────────────┘           └─────────────────┘           └─────────────────┘
+        │                             │                             │
+        ▼                             ▼                             ▼
+┌───────────────┐           ┌─────────────────┐           ┌─────────────────┐
+│ 👥 Groupes    │           │ 📋 Stratégies   │           │ 🖥️ ESP          │
+│ Dynamiques    │           │ Conformité      │           │ (Enrollment     │
+│ (Départements)│           │ & Configuration │           │  Status Page)   │
+└───────────────┘           └─────────────────┘           └─────────────────┘
+        │                             │                             │
+        └─────────────────────────────┼─────────────────────────────┘
+                                      ▼
+                    ┌─────────────────────────────────┐
+                    │      🛡️ ACCÈS CONDITIONNEL       │
+                    │   Zéro Trust - Appareil Conforme  │
+                    └─────────────────────────────────┘
+                                      │
+        ┌─────────────────────────────┼─────────────────────────────┐
+        ▼                             ▼                             ▼
+┌───────────────┐           ┌─────────────────┐           ┌─────────────────┐
+│ 📱 Applications│           │  🔒 Sécurité    │           │  🔄 Maintenance  │
+│ M365 + Win32  │           │  BitLocker      │           │  WUfB Rings     │
+│               │           │  Defender       │           │  Feature/QoL    │
+└───────────────┘           └─────────────────┘           └─────────────────┘
+
+graph TD
+    A[👤 Utilisateur] -->|Authentification| B[🔷 Entra ID]
+    B -->|Token JWT| C[🛡️ Accès Conditionnel]
+    C -->|Vérification conformité| D[📦 Intune]
+    D -->|État appareil| C
+    C -->|Autorisation| E[☁️ Microsoft 365]
+
+    F[🖥️ Windows 11 OOBE] -->|Autopilot| G[🔄 ESP]
+    G -->|Profils| H[📋 Configuration]
+    G -->|Apps| I[📱 Applications]
+    G -->|Sécurité| J[🔒 BitLocker/Defender]
+
+    K[⏰ Windows Update] -->|Anneaux| L[🔄 WUfB]
+    L -->|Patchs| F
 
 ### 2.1 Schéma d'ensemble
 📸 *Schéma simple : tenant → groupes (utilisateurs / appareils) → profils Autopilot, conformité, configuration → VM Windows 11 → accès conditionnel*

@@ -2,7 +2,8 @@
 
 # Lab Entra ID & Intune : gérer un poste Windows 11 de bout en bout
 
-![Bannière du lab](images/banniere.png)
+<img width="752" height="536" alt="Gemini_Generated_Image_wi2wg3wi2wg3wi2w" src="https://github.com/user-attachments/assets/4c5b4d3f-96c7-4c9e-a85b-a7f2a2b7135e" />
+
 
 Ce lab montre, pas à pas, comment une entreprise peut **créer ses utilisateurs, déployer un PC Windows 11 sans l'installer à la main, le chiffrer, y installer des applications, lui appliquer des règles, puis refuser l'accès aux données de l'entreprise aux appareils qui ne respectent pas ces règles**. Tout se fait dans le cloud Microsoft (Entra ID et Intune), sur un tenant d'essai, avec une machine virtuelle.
 
@@ -80,7 +81,7 @@ flowchart LR
     E -->|Non| G[Accès refusé]
 ```
 
-📸 *Capture ou schéma de ton architecture (optionnel)*
+
 
 ### 2.2 Prérequis
 
@@ -198,8 +199,12 @@ Write-Host "Utilisateurs créés : $created / Erreurs : $errors" -ForegroundColo
 - Le mot de passe est saisi à l'exécution : **il n'est jamais écrit dans le script ni dans le dépôt**.
 
 **Résultat attendu** : « Utilisateurs créés : 10 / Erreurs : 0 ».
+<img width="811" height="704" alt="Capture d&#39;écran 2026-10-01 193311" src="https://github.com/user-attachments/assets/873635bf-6286-43cf-bf71-039195169f73" />
+<img width="1097" height="792" alt="Capture d&#39;écran 2026-10-01 193327" src="https://github.com/user-attachments/assets/b82faff4-7094-4f28-8920-a59b5290c82c" />
+<img width="1267" height="795" alt="Capture d&#39;écran 2026-10-01 194702" src="https://github.com/user-attachments/assets/aa8d201e-ee7b-4c70-9f90-8f4ee0fee3b0" />
 
-📸 *Sortie PowerShell : « Utilisateurs créés : 10 »*
+
+
 
 ### 3.4 Attribuer la licence E5
 
@@ -221,7 +226,7 @@ foreach ($u in $users) {
 
 **Vérification** : `admin.microsoft.com` → **Utilisateurs → Utilisateurs actifs** : chaque compte affiche sa licence.
 
-📸 *Liste des utilisateurs avec leurs licences*
+📸 *Liste des u
 
 ### 3.5 Le compte `admintest`
 
@@ -245,7 +250,11 @@ Un 11ᵉ compte, `admintest`, sert à se connecter sur la VM et à tester l'acc�
 
 > Si le groupe reste vide, vérifie l'orthographe exacte des valeurs (`IT`, `Technicien`), sans espace parasite.
 
-📸 *Règle dynamique et liste des membres*
+<img width="936" height="903" alt="Capture d&#39;écran 2026-10-01 195121" src="https://github.com/user-attachments/assets/4aa631a0-e4aa-4f47-892c-686f7a8cc5d1" />
+<img width="1333" height="784" alt="Capture d&#39;écran 2026-10-06 055329" src="https://github.com/user-attachments/assets/a29900f1-6533-4b4b-a136-5bfd2de65956" />
+<img width="1710" height="642" alt="Capture d&#39;écran 2026-10-01 195216" src="https://github.com/user-attachments/assets/fce53a27-a53e-450d-90e2-2251cee34d2c" />
+
+
 
 ---
 
@@ -272,7 +281,8 @@ Un 11ᵉ compte, `admintest`, sert à se connecter sur la VM et à tester l'acc�
 
 > Si cette portée reste sur **Aucun**, l'appareil se joint à Entra ID mais **ne s'inscrit jamais dans Intune**.
 
-📸 *Page de la portée MDM avec la valeur « Tout »*
+<img width="1131" height="761" alt="image" src="https://github.com/user-attachments/assets/4dc1220a-8378-4772-8267-fc817c90141d" />
+
 
 ### 4.2 Créer le groupe d'appareils Autopilot
 
@@ -318,7 +328,8 @@ Un 11ᵉ compte, `admintest`, sert à se connecter sur la VM et à tester l'acc�
 
 Puis **Vérifier + créer → Créer**.
 
-📸 *Propriétés du profil (OOBE) et attributions*
+<img width="1163" height="863" alt="Capture d&#39;écran 2026-10-01 214054" src="https://github.com/user-attachments/assets/334219ff-309b-4096-a8a1-2fe9953ec30a" />
+
 
 ### 4.4 Configurer la page d'état de l'inscription (ESP)
 
@@ -329,8 +340,8 @@ Puis **Vérifier + créer → Créer**.
    - **Bloquer l'utilisation de l'appareil tant que toutes les applications et tous les profils ne sont pas installés** : Oui
    - **Délai d'expiration** : 60 minutes
 4. Enregistre.
+<img width="1463" height="927" alt="image" src="https://github.com/user-attachments/assets/2db1b4ea-602b-425d-9b04-fb0c04e6253e" />
 
-📸 *Configuration de l'ESP*
 
 ### 4.5 Préparer la machine virtuelle VMware
 
@@ -349,7 +360,7 @@ Puis **Vérifier + créer → Créer**.
 
 **Vérifie avant de continuer** : *VM → Paramètres → Options → Avancé* : **UEFI** et **Activer le démarrage sécurisé** doivent être cochés (sinon le TPM et Secure Boot échoueront plus tard).
 
-📸 *Paramètres VMware : TPM, UEFI, démarrage sécurisé*
+<img width="819" height="680" alt="Capture d&#39;écran 2026-10-04 124255" src="https://github.com/user-attachments/assets/6cca3cd2-7506-407c-a7a5-5209028aa0e9" />
 
 ### 4.6 Envoyer le hash matériel à Autopilot
 
@@ -366,8 +377,12 @@ Puis **Vérifier + créer → Créer**.
 4. Réponds **Y** si PowerShell propose d'installer NuGet ou de faire confiance au dépôt.
 5. Dans la fenêtre Microsoft qui s'ouvre, connecte-toi avec ton **administrateur** et accepte les autorisations.
 6. Attends le message de réussite.
+7. <img width="1103" height="752" alt="Capture d&#39;écran 2026-10-01 222055" src="https://github.com/user-attachments/assets/fe5bd238-00b7-4553-bcc2-e4b0746389bb" />
+<img width="1061" height="720" alt="Capture d&#39;écran 2026-10-01 222337" src="https://github.com/user-attachments/assets/359dca8c-8f2d-4592-94f7-567d97a771e0" />
 
-📸 *Message de réussite de l'import du hash*
+
+
+<img width="598" height="525" alt="Capture d&#39;écran 2026-10-04 114611" src="https://github.com/user-attachments/assets/17dcdd46-fb02-42fe-8920-5abbdd035f03" />
 
 ### 4.7 Vérifier l'enregistrement et attendre l'attribution
 
@@ -380,7 +395,8 @@ Puis **Vérifier + créer → Créer**.
 
 Si l'état reste « Non affecté », vérifie que la VM figure dans `GRP-Autopilot-Devices` (Entra ID → Groupes → Membres) et que le profil est bien attribué à ce groupe.
 
-📸 *Appareil dans la liste Autopilot, état du profil « Attribué »*
+<img width="1690" height="533" alt="image" src="https://github.com/user-attachments/assets/692a949e-5195-4ccc-988c-86d5056b8f5e" />
+
 
 ### 4.8 Lancer le déploiement
 
@@ -391,8 +407,10 @@ Si l'état reste « Non affecté », vérifie que la VM figure dans `GRP-Autopil
 5. La page d'état de l'inscription (ESP) s'affiche. Laisse-la terminer (10 à 30 minutes).
 6. La VM redémarre et affiche le bureau.
 
-📸 *Écran de connexion professionnelle à l'OOBE*
-📸 *Bureau final*
+<img width="1051" height="698" alt="Capture d&#39;écran 2026-10-02 200622" src="https://github.com/user-attachments/assets/a38b0394-533a-467d-a99a-85b8e6fcb830" />
+
+<img width="1104" height="804" alt="Capture d&#39;écran 2026-10-02 201420" src="https://github.com/user-attachments/assets/831b8084-53d7-4717-b96b-f47f93073c1c" />
+
 
 ### 4.9 Vérifier que tout est en place
 
@@ -403,8 +421,11 @@ Si l'état reste « Non affecté », vérifie que la VM figure dans `GRP-Autopil
 
 **Dans Intune** : **Appareils → Tous les appareils** → la VM est listée, **Géré par : Intune**, **Propriété : Entreprise**. Les colonnes *Version du système* et *Dernier check-in* peuvent rester vides (`0.0.0.0`) pendant quelques minutes : clique sur **Synchroniser**.
 
-📸 *Informations système de la VM (nom LAB-...)*
-📸 *Fiche de l'appareil dans Intune*
+<img width="1679" height="459" alt="image" src="https://github.com/user-attachments/assets/ef0dfb8f-8d91-4600-9712-c16c283ba959" />
+
+<img width="1583" height="851" alt="image" src="https://github.com/user-attachments/assets/faa0f810-e47c-4e74-8fd8-7406703ab66f" />
+
+
 
 ---
 
@@ -434,7 +455,9 @@ Si l'état reste « Non affecté », vérifie que la VM figure dans `GRP-Autopil
 4. **Attributions** : groupe `GRP-IT-Techniciens`.
 5. **Vérifier + créer → Créer**.
 
-📸 *Configuration de la stratégie `secuIT`*
+<img width="1082" height="782" alt="Capture d&#39;écran 2026-10-04 115733" src="https://github.com/user-attachments/assets/8aa4e527-62de-4c51-baa9-eb80729b4d70" />
+
+
 
 ### 5.2 Lire le rapport (premier résultat)
 
@@ -448,7 +471,8 @@ Au premier passage, certains paramètres sont en **erreur** :
 
 > Attention : une appartenance au groupe `GRP-IT-Techniciens` est nécessaire. Sinon, la stratégie ne s'applique pas et Intune déclare l'appareil « conforme » par défaut, ce qui ne prouve rien.
 
-📸 *Rapport de conformité avec les erreurs*
+<img width="1507" height="922" alt="Capture d&#39;écran 2026-10-04 120422" src="https://github.com/user-attachments/assets/cf1f7d6e-ea67-4a0f-bf48-341752192905" />
+
 
 ### 5.3 Diagnostiquer et corriger
 
@@ -472,7 +496,7 @@ Puis `Win+R` → `msinfo32` :
    ```
 4. Redémarre la VM, vérifie `msinfo32`, resynchronise, puis attends 30 à 60 minutes.
 
-📸 *`msinfo32` avant et après (démarrage sécurisé)*
+
 
 ### 5.4 Créer la stratégie de chiffrement BitLocker
 
@@ -514,9 +538,9 @@ La conformité **constate** l'état du disque mais ne le chiffre pas. Pour l'act
 > Les sous-paramètres de récupération n'apparaissent que lorsque *« Choose how BitLocker-protected operating system drives can be recovered »* est activé. « AD DS » désigne ici la sauvegarde dans Entra ID.
 
 4. **Attributions** : `GRP-IT-Techniciens`.
-5. **Vérifier + créer → Créer**. (Le bloc « Insights from Copilot » peut afficher une erreur : il est sans rapport avec ta configuration, ignore-le.)
+5. **Vérifier + créer → Créer**. (Le bloc « Insights from Copilot » peut afficher une erreur : il est sans rapport avec ta configuration, ignore-le
+   <img width="1182" height="791" alt="Capture d&#39;écran 2026-10-04 131407" src="https://github.com/user-attachments/assets/8fa37d9e-8467-4656-8891-ac234d6ad13a" />
 
-📸 *Récapitulatif de la stratégie `BitLocker-OS-Lab`*
 
 ### 5.5 Vérifier le chiffrement
 
@@ -527,14 +551,16 @@ La conformité **constate** l'état du disque mais ne le chiffre pas. Pour l'act
 
 > **Avant la stratégie**, la VM était déjà chiffrée en XTS-AES 128, avec la protection désactivée et aucun protecteur de clé : Windows avait apparemment chiffré le disque seul. La stratégie `BitLocker-OS-Lab` a suffi à rétablir un état conforme.
 
-📸 *État des paramètres de la stratégie : Réussite*
-📸 *Clé de récupération dans la fiche de l'appareil* (**valeur masquée**)
+<img width="601" height="309" alt="Capture d&#39;écran 2026-10-04 131834" src="https://github.com/user-attachments/assets/9c4acbea-49f8-4e2e-99c0-37bf4778b706" />
+
+
 
 ### 5.6 Résultat
 
 Après 30 à 60 minutes, **les 8 paramètres de `secuIT` passent en « Conforme »**.
 
-📸 *Rapport de conformité : 8 paramètres sur 8 conformes*
+<img width="1576" height="854" alt="Capture d&#39;écran 2026-10-04 134101" src="https://github.com/user-attachments/assets/58785c25-f14d-40f5-a71d-73c4b36e7c22" />
+
 
 ---
 
@@ -560,7 +586,8 @@ Une application classique (`.msi`, `.exe`) doit être **empaquetée** au format 
 
 À la fin, `C:\Output` contient un fichier `.intunewin`.
 
-📸 *Fin d'exécution de la commande et fichier `.intunewin`*
+<img width="1436" height="555" alt="Capture d&#39;écran 2026-10-04 183801" src="https://github.com/user-attachments/assets/f6339d92-caa8-49f0-bed6-8317ea7a7d0a" />
+
 
 **Ajout dans Intune**
 
@@ -593,7 +620,8 @@ Une application classique (`.msi`, `.exe`) doit être **empaquetée** au format 
 9. **Attributions** : **Obligatoire** → `GRP-IT-Techniciens`.
 10. **Vérifier + créer → Créer**.
 
-📸 *Programme, règle de détection et attributions*
+<img width="1641" height="844" alt="Capture d&#39;écran 2026-10-04 191914" src="https://github.com/user-attachments/assets/ff4ccf5a-2254-44e5-9ded-c55b9db1b40a" />
+
 
 **Vérification**
 1. Synchronise la VM (*Comptes → Accès Professionnel ou scolaire → Info → Synchroniser*).
@@ -602,8 +630,7 @@ Une application classique (`.msi`, `.exe`) doit être **empaquetée** au format 
 
 Journal en cas de problème : `C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\IntuneManagementExtension.log`.
 
-📸 *État de l'installation : Installé*
-📸 *Notepad++ dans le menu Démarrer de la VM*
+
 
 ### 6.2 Microsoft 365 Apps
 
@@ -616,9 +643,9 @@ Journal en cas de problème : `C:\ProgramData\Microsoft\IntuneManagementExtensio
 
 **Vérification** : état **Installé** dans Intune, et les applications Office dans le menu Démarrer de la VM.
 
-📸 *Configuration de l'application*
-📸 *État de l'installation : Installé*
-📸 *Applications Office dans le menu Démarrer*
+<img width="1272" height="933" alt="Capture d&#39;écran 2026-10-04 161606" src="https://github.com/user-attachments/assets/b730a7c4-73b3-477e-b9f1-d6ead9590a8b" />
+<img width="1038" height="792" alt="Capture d&#39;écran 2026-10-04 191931" src="https://github.com/user-attachments/assets/0e19a3aa-1a4b-43ea-9163-17030a136a40" />
+
 
 ---
 
@@ -637,7 +664,8 @@ Le **catalogue de paramètres** donne accès à des milliers de réglages Window
 6. Ferme le sélecteur, mets le paramètre sur **Activé**.
 7. **Attributions** : `GRP-IT-Techniciens`. Puis **Créer**.
 
-📸 *Paramètre dans le profil*
+<img width="1712" height="521" alt="image" src="https://github.com/user-attachments/assets/31387df1-211b-43ec-a92d-79956f0c5c2c" />
+
 
 **Test**
 1. Synchronise la VM. Dans Intune, la fiche de la VM → **Configuration de l'appareil** doit afficher le profil en **Réussite**.
@@ -645,7 +673,7 @@ Le **catalogue de paramètres** donne accès à des milliers de réglages Window
 3. Dans la VM, essaie de copier un fichier sur la clé : **l'écriture est refusée**. Si besoin, ferme puis rouvre la session pour appliquer la stratégie utilisateur.
 4. Redonne la clé à ton PC (*Déconnecter*).
 
-📸 *Message de refus d'écriture sur la VM*
+
 
 ### 7.2 Update Rings : piloter les mises à jour Windows
 
@@ -668,10 +696,10 @@ Le **catalogue de paramètres** donne accès à des milliers de réglages Window
 **Vérification**
 - Intune → ton anneau → **Rapport** : **1 appareil en Réussite**, 0 erreur, 0 conflit.
 - Sur la VM : *Paramètres → Windows Update → Options avancées* : certaines options sont grisées avec le message « Ce paramètre n'est pas disponible en raison de la stratégie de votre organisation ».
+<img width="991" height="859" alt="image" src="https://github.com/user-attachments/assets/15209584-8845-4585-8209-966502047369" />
 
-📸 *Configuration de l'anneau*
-📸 *Rapport : 1 appareil en Réussite*
-📸 *Windows Update sur la VM : paramètres gérés par l'organisation*
+<img width="1721" height="473" alt="image" src="https://github.com/user-attachments/assets/55411e24-c30f-45ab-9e80-76b318dd3eb0" />
+<img width="777" height="615" alt="Capture d&#39;écran 2026-10-04 203200" src="https://github.com/user-attachments/assets/bad31664-95cd-4a75-8500-6f0d293eb94e" />
 
 ---
 
@@ -689,7 +717,8 @@ Les *paramètres de sécurité par défaut* d'Entra ID et l'accès conditionnel 
 
 > Ces paramètres imposaient la MFA aux administrateurs : c'est pourquoi on crée une stratégie équivalente au 8.3.
 
-📸 *Paramètres de sécurité par défaut désactivés*
+<img width="1614" height="215" alt="image" src="https://github.com/user-attachments/assets/7959df0e-8c7f-4bef-8898-fa2435412c11" />
+
 
 ### 8.2 Stratégie « Exiger un appareil conforme »
 
@@ -701,7 +730,8 @@ Les *paramètres de sécurité par défaut* d'Entra ID et l'accès conditionnel 
 5. **Octroyer** → **Accorder l'accès** → **Exiger que l'appareil soit marqué comme conforme**.
 6. **Activer une stratégie** : commence en **Rapport uniquement** (la stratégie est évaluée mais pas appliquée), puis passe sur **Activé** après vérification.
 
-📸 *Détails de la stratégie*
+<img width="854" height="670" alt="image" src="https://github.com/user-attachments/assets/d6c8d590-513f-4d6b-acf7-729ff4952e6b" />
+
 
 ### 8.3 Stratégie « Exiger la MFA pour les administrateurs »
 
@@ -710,7 +740,11 @@ Elle remplace la protection des paramètres de sécurité par défaut :
 - **Octroyer** : **Exiger l'authentification multifacteur**.
 - **État** : **Activé**, après avoir enregistré une méthode MFA sur ton compte administrateur.
 
-📸 *Liste des stratégies d'accès conditionnel*
+<img width="798" height="669" alt="image" src="https://github.com/user-attachments/assets/1d4e6936-d1a4-4fea-98ad-f7d53b52238b" />
+
+<img width="1580" height="803" alt="image" src="https://github.com/user-attachments/assets/7e08d202-10c4-4af7-85a9-9183918b46fb" />
+
+
 
 ### 8.4 Vérifier avant d'activer : le mode rapport
 
@@ -725,12 +759,17 @@ Elle remplace la protection des paramètres de sécurité par défaut :
 | 1 | **PC personnel non géré** | Fenêtre de navigation privée, connexion avec `admintest` sur `portal.azure.com` ou `outlook.office.com` | Accès **refusé** |
 | 2 | **VM conforme** | Edge, profil connecté à `admintest`, `outlook.office.com` | Accès **autorisé** |
 
-📸 *Écran de blocage sur le PC*
-📸 *Accès réussi depuis la VM*
+<img width="495" height="516" alt="Capture d&#39;écran 2026-10-04 211056" src="https://github.com/user-attachments/assets/60c4f6ef-9d3a-4f6f-a306-e461f1d3ca2f" />
+
+
 
 **Preuve dans les journaux** : Entra ID → **Journaux de connexion** → ouvre la connexion → onglet **Accès conditionnel**. La stratégie apparaît en **Réussite** (VM conforme) ou en **Échec/Défaillance** (PC non géré). Dans mes journaux, les connexions *One Outlook Web* sont en réussite et la connexion *Azure Portal* bloquée est en défaillance.
 
-📸 *Journaux de connexion : « Exiger un appareil conforme » en réussite et en échec* (**adresses IP masquées**)
+<img width="917" height="200" alt="Capture d&#39;écran 2026-10-04 211902" src="https://github.com/user-attachments/assets/70cdc8ad-fea2-4546-b57b-3a8b3136ed3f" />
+
+<img width="833" height="380" alt="Capture d&#39;écran 2026-10-04 212110" src="https://github.com/user-attachments/assets/46f98a39-c9d4-4efa-91f2-b81adfd60fc6" />
+
+
 
 ---
 
